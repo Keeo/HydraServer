@@ -1,4 +1,5 @@
 <div class="list-group">
-    {{link-to 'Brumla' 'server' 'Brumla' class="list-group-item"}}
-    {{link-to 'Klarka' 'server' 'Klarka' class="list-group-item"}}
+    {{#each servers as |server|}}
+        {{link-to server.name 'server' server.name class="list-group-item"}}
+    {{/each}}
 </div>
