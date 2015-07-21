@@ -1,6 +1,6 @@
 /* jshint node: true */
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'hydra-server-monitoring',
     environment: environment,
@@ -14,6 +14,9 @@ module.exports = function(environment) {
     },
 
     APP: {
+      servers: [
+        {name: 'Brumla', url: 'http://brumla.treewer.com:6543/?out=json'}
+      ]
       // Here you can pass flags/options to your application instance
       // when it is created
     },
@@ -22,7 +25,7 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'script-src': "'self'",
       'font-src': "'self' https://fonts.gstatic.com",
-      'connect-src': "'self' brumla.treewer.com:6543",
+      'connect-src': "'self' *",
       'img-src': "'self'",
       'style-src': "'self' https://fonts.googleapis.com",
       'media-src': "'self'"

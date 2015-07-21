@@ -1,19 +1,20 @@
 `import Ember from 'ember'`
+`import config from '../config/environment'`
 
 ServerRoute = Ember.Route.extend
   intervalId: null
   model: (params)->
+    server = config.APP.servers.find (item)->
+      item.name is params.server
+
     line1 = new TimeSeries()
     @set 'intervalId', setInterval(
       => (
-        #line1.append(new Date().getTime(), Math.random() * if params.server is 'Klarka' then 100 else 50)
-
         Ember.$.ajax(
-          url: "http://brumla.treewer.com:6543/?out=json",
+          url: server.url,
           type: "GET",
         ).then(
           (data) =>
-            #console.log new Date().getTime(), new Date(data.timestamp).getTime()
             line1.append(
               new Date().getTime()
               @getPercentage(data.CPU[0].usage_percentage)
