@@ -1,6 +1,5 @@
-<h4>Cpu usage</h4>
-{{smoothie-chart register-as=cpuUsage data=model minValue=0 maxValue=100}}
+{{charts.cpu-chart pollster=model}}
 <h4>Ram usage</h4>
-{{smoothie-chart data=model minValue=0 maxValue=8}}
+{{!smoothie-chart data=model minValue=0 maxValue=8}}
 <h4>Free disk space</h4>
-{{smoothie-chart data=model minValue=0 maxValue=1000}}
+{{!smoothie-chart data=model minValue=0 maxValue=1000}}

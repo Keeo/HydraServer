@@ -6,7 +6,7 @@ SmoothieChartComponent = Ember.Component.extend
 
   _canvas: null
   smoothie: null
-  data: null
+  chartLines: null
 
   minValue: null
   maxValue: null
@@ -22,11 +22,9 @@ SmoothieChartComponent = Ember.Component.extend
     @$().append(canvas)
     @set '_canvas', canvas
 
-  _dataReloaded: Ember.observer(
-    'data'
-    ->
-      @_buildCanvas()
-      @_buildSmoothie()
+  _dataReloaded: Ember.observer('chartLines', ->
+    @_buildCanvas()
+    @_buildSmoothie()
   )
 
   _buildSmoothie: ->
@@ -42,14 +40,14 @@ SmoothieChartComponent = Ember.Component.extend
       maxValue: @get('maxValue')
 
     smoothie.streamTo @get('_canvas')[0], @get('delay')
-    smoothie.addTimeSeries(
-      @get 'data'
-      {
-        lineWidth: 1.1
-        strokeStyle: '#0ce3ac'
-        fillStyle: '#007053'
-      }
+
+    @get('chartLines').forEach((chartLine)->
+      smoothie.addTimeSeries(
+        chartLine.get('line')
+        chartLine.get('options')
+      )
     )
+
     @set 'smoothie', smoothie
 
   didInsertElement: ->
